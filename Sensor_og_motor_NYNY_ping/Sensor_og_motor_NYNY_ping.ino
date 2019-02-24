@@ -16,7 +16,7 @@ Servo servo;
 #define DHTPIN 6
 #define DHTTYPE DHT22
 
- DHT dht(DHTPIN,DHTTYPE);
+  DHT dht(DHTPIN,DHTTYPE);
 
 //For sensor1 og to.
 #define trigpin 12
@@ -32,7 +32,7 @@ NewPing sonar2(trigpin2, echopin2, MAX_DIST);
 const int iterations = 10;
 
 //tolleransen for feil
-const float TOL = 1;
+const float TOL = 0.5;
 
 //-------------------------------------------------
 
@@ -48,13 +48,13 @@ void setup() {
   // serial.begin; viser input.
   //servo.attach viser hvilken pin den har.
   Serial.begin(9600);
+  dht.begin();
   }
 
 void loop() {
   
   hum = dht.readHumidity();
   temp = dht.readTemperature();
-  
   SpeedSound = getSpeed(temp, hum);
   servo.attach(7);
   dist = getDistance(trigpin, sonar.ping_median(iterations));
@@ -75,7 +75,7 @@ float getSpeed(float temp, float hum){
 }
 
 float getDistance(int trig,float echo){
-    dist = (echo/2) *0.0343;
+    dist = (echo/2) * SpeedSound;
     if (dist >=400 || dist <= 2){
       Serial.println("Avstanden er unøyaktig.");
     }
