@@ -5,10 +5,10 @@
 
 
 
-SoftwareSerial mySerial(10, 11);
+SoftwareSerial mySerial1(10, 11);
 
 
-TFMini laser;
+TFMini laser1;
 
 
 void setup(){
@@ -18,20 +18,20 @@ while (!Serial);
 
 Serial.println("Beginning");
 
-mySerial.begin(TFMINI_BAUDRATE);
+mySerial1.begin(TFMINI_BAUDRATE);
 
-laser.begin(&mySerial);
+laser1.begin(&mySerial1);
 
 
 
 }
 
 void loop(){
-  uint16_t dist = laser.getDistance();
-  uint16_t strength = laser.getRecentSignalStrength();
+  uint16_t dist1 = laser1.getDistance();
+  uint16_t strength1 = laser1.getRecentSignalStrength();
 
-Serial.print(dist);
+Serial.print(dist1);
 Serial.print( "cm sigstrength: ");
-Serial.println(strength);
+Serial.println(strength1);
 delay(25);
 }
